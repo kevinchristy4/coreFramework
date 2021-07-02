@@ -10,16 +10,16 @@ import org.openqa.selenium.WebDriver;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class test1
 {
     WebDriver drv = null;
     private Logger log = Logger.getLogger();
 
-
     @Test
     public void shouldAnswerWithTrue() throws Exception {
 
-        log.startTest("sampleTest");
+//        Thread.sleep(10000);
+        log.startTest("sampleTest1111");
         Browser browser = new Browser();
         log.step(1,"Select chrome");
         browser.selectBrowser("chrome");
@@ -32,8 +32,7 @@ public class AppTest
         elements element = new elements(By.xpath("//a[text()='CONTACT']"),"Contact");
         element.waitForElement();
         element.click();
-        log.endTest("sample test");
-        browser.close();
+        log.endTest("sample test1111");
 //        element.print();
 
     }
