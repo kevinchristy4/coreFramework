@@ -31,6 +31,7 @@ public class test1
         log.step(4,"Click contact");
         elements element = new elements(By.xpath("//a[text()='CONTACT']"),"Contact");
         element.waitForElement();
+
         element.click();
         log.endTest("sample test1111");
 //        element.print();

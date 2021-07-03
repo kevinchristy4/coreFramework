@@ -24,7 +24,7 @@ public class AppTest
         log.step(1,"Select chrome");
         browser.selectBrowser("chrome");
         log.step(2,"opening chrome");
-        drv = browser.getDriver();
+//        drv = browser.getDriver();
         log.step(3,"Go to ideas2it");
         browser.getDriver().get("https://www.ideas2it.com");
         browser.waitForPage();

@@ -2,6 +2,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="testSuite" verbose="1" parallel="classes" thread-count="2">
+    <listeners>
+        <listener class-name="org.core.util.ReportListener" />
+        <listener class-name="org.core.util.RetryListener" />
+
+    </listeners>
     <test name="test" >
         <classes>
             <class name="org.core.AppTest" />
