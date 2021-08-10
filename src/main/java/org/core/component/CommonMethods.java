@@ -1,6 +1,7 @@
 package org.core.component;
 
 import org.core.driver.Browser;
+import org.core.util.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,36 +14,31 @@ public class CommonMethods implements WebElement {
     private static RemoteWebDriver driver;
     private By locator;
     private WebElement ele;
+    private Logger log = Logger.getLogger();
 
     public CommonMethods(By locator,String name) throws Exception {
         driver = new Browser().getDriver();
         this.locator = locator;
         ele = driver.findElement(this.locator);
     }
-
     // A simple custom wait
-    public void waitForElement(){
-
+    public void waitForElement() throws Exception {
         WebDriverWait wait =  new WebDriverWait(driver, 60);
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait.until((Function<WebDriver, Boolean>) driver -> {
             WebElement waitedEle =  wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(locator)));
             if(waitedEle != null && driver.findElement(locator).isDisplayed()){
-                System.out.println(waitedEle+"\n"+driver.findElement(locator).isDisplayed());
                 return true;
             }
             return false;
         });
     }
 
-
     /* Have your owm custom implementation of selenium methods - or just use the original methods */
-
     @Override
     public void click() {
+        log.info("Clicking --- "+ele.getText());
         ele.click();
     }
-
     @Override
     public void submit() {
         ele.submit();

@@ -1,41 +1,27 @@
-package org.core.driver;
+package org.core.component;
+
+import org.core.driver.Browser;
+import org.core.util.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.function.Function;
 
-public class Browser {
-    private static Browsers browserName;
-    public enum Browsers{
-        CHROME("chrome"),
-        FIREFOX("firefox");
-       //Add other required browsers
-        public String value;
-        Browsers(String values){
-            value = values;
-        }
-        public String toString() {
-            return value;
-        }
-    }
-    //Modify this method into switch or any other according to your need
-    public Browsers selectBrowser(String browser){
-        if(browser.toLowerCase() == "chrome"){
-            browserName = Browsers.CHROME;
-        }else {
-            browserName = Browsers.FIREFOX;
-        }
-        return browserName;
-    }
-    public RemoteWebDriver getDriver() throws Exception {
-            return Browserfactory.getDriver(browserName);
-    }
-    public void close() throws Exception {
-        Browserfactory.closeBrowser();
-    }
-    public void waitForPage() throws Exception {
-        new WebDriverWait(getDriver(), 60).until((Function<WebDriver, Boolean>) driver -> {
+public abstract class wait{
+
+    private static RemoteWebDriver driver;
+    private By locator;
+    private WebElement ele;
+    private Logger log = Logger.getLogger();
+
+
+    public static void waitForPage() throws Exception {
+        new WebDriverWait(new Browser().getDriver(), 60).until((Function<WebDriver, Boolean>) driver -> {
             Boolean isPageLoaded = false;
             try {
                 Object isDocumentReady = ((JavascriptExecutor)
@@ -60,7 +46,7 @@ public class Browser {
                     isPageLoaded =  true;
                 }
             } catch (Exception e) {
-               System.out.println(e);
+                System.out.println(e);
             }
             return isPageLoaded;
         });
