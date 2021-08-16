@@ -1,6 +1,7 @@
 package org.core.driver;
 
 //import org.apache.log4j.helpers.ThreadLocalMap;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,8 +19,8 @@ public abstract class Browserfactory {
     private static RemoteWebDriver setDriver(Browsers browserName) throws Exception{
         switch (browserName){
             case CHROME:
-                System.setProperty("webdriver.chrome.driver", "/home/kevin/automation/blog/seleniumFW/drivers/chromedriver");
                 ChromeOptions chcoptions = new ChromeOptions();
+                WebDriverManager.chromedriver().setup();
                 chcoptions.addArguments("start-maximized");
                 chcoptions.addArguments("incognito");
                 System.setProperty("webdriver.chrome.silentOutput", "true");
