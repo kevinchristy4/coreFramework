@@ -17,31 +17,39 @@ public abstract class Browserfactory {
     public static RemoteWebDriver driver = null;
     private static Browsers browserName = null;
     private static RemoteWebDriver setDriver(Browsers browserName) throws Exception{
-        switch (browserName){
-            case CHROME:
-                ChromeOptions chcoptions = new ChromeOptions();
-                WebDriverManager.chromedriver().setup();
-                chcoptions.addArguments("start-maximized");
-                chcoptions.addArguments("incognito");
-                System.setProperty("webdriver.chrome.silentOutput", "true");
-                java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
-                driver = new ChromeDriver(chcoptions);
-                break;
-            case FIREFOX:
-                FirefoxOptions ffoptions = new FirefoxOptions();
-                //set required options
-                driver = new FirefoxDriver(ffoptions);
-                driver.manage().window().maximize();
+        try{
+            switch (browserName){
+                case CHROME:
+                    ChromeOptions chcoptions = new ChromeOptions();
+                    WebDriverManager.chromedriver().setup();
+                    chcoptions.addArguments("start-maximized");
+                    chcoptions.addArguments("incognito");
+                    System.setProperty("webdriver.chrome.silentOutput", "true");
+                    java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
+                    driver = new ChromeDriver(chcoptions);
+                    break;
+                case FIREFOX:
+                    FirefoxOptions ffoptions = new FirefoxOptions();
+                    //set required options
+                    driver = new FirefoxDriver(ffoptions);
+                    driver.manage().window().maximize();
+            }
+            //Add other browsers and configurations as required
+        } catch (Exception e){
+            System.out.println(e);
         }
-        //Add other browsers and configurations as required
         return driver;
     }
     public static RemoteWebDriver getDriver(Browsers browser) throws Exception {
+        try{
             if(driverHolder.get() == null){
                 browserName = browser;
                 driverHolder.set(Browserfactory.setDriver(browser));
                 return driverHolder.get();
             }
+        } catch (Exception e){
+            System.out.println(e);
+        }
             return driverHolder.get();
     }
     public static void closeBrowser() throws Exception {
