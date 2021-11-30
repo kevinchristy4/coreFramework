@@ -12,7 +12,7 @@ import org.core.driver.Browser.Browsers;
 
 import java.util.logging.Level;
 
-public abstract class Browserfactory {
+public final class Browserfactory {
     static ThreadLocal<RemoteWebDriver> driverHolder = new ThreadLocal<RemoteWebDriver>();
     public static RemoteWebDriver driver = null;
     private static Browsers browserName = null;

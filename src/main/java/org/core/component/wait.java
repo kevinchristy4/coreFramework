@@ -21,7 +21,7 @@ public abstract class wait{
 
 
     public static void waitForPage() throws Exception {
-        new WebDriverWait(new Browser().getDriver(), 60).until((Function<WebDriver, Boolean>) driver -> {
+        new WebDriverWait(new Browser().getDriver(), 60).until(driver -> {
             Boolean isPageLoaded = false;
             try {
                 Object isDocumentReady = ((JavascriptExecutor)

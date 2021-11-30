@@ -24,7 +24,7 @@ public class CommonMethods implements WebElement {
     // A simple custom wait
     public void waitForElement() throws Exception {
         WebDriverWait wait =  new WebDriverWait(driver, 60);
-        wait.until((Function<WebDriver, Boolean>) driver -> {
+        wait.until(driver -> {
             WebElement waitedEle =  wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(locator)));
             if(waitedEle != null && driver.findElement(locator).isDisplayed()){
                 return true;
